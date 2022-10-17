@@ -1,121 +1,83 @@
-// import firebase from 'firebase/compat/app';
-// import 'firebase/compat/auth';
-// import { getAuth } from "firebase/auth";
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//     apiKey: "AIzaSyB48Y5dXU9LEzF90v_HpwjRuhpdn5E3YRU",
-//     authDomain: "montage-my-life.firebaseapp.com",
-//     projectId: "montage-my-life",
-//     storageBucket: "montage-my-life.appspot.com",
-//     messagingSenderId: "313907210763",
-//     appId: "1:313907210763:web:074d392c625a87e21e350e",
-//     measurementId: "G-9YD1RBJ11M"
-// };
+export default function Home(props) {
+    const [caption, setCaption] = useState("");
+    const [prompt, setPrompt] = useState("");
+    const [date, setDate] = useState("");
+    const [entry, setEntry] = useState("")
 
-// Initialize Firebase
-// var app = firebase.initializeApp(firebaseConfig);
+    const onSubmit = evt => {
+        evt.preventDefault();
+        fetch('https://time-cache.uc.r.appspot.com/addEntry', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "uid": props.auth.currentUser.uid,
+                "caption": caption,
+                "prompt": prompt,
+                "entry": entry,
+                "date": date
+            })
+        })
+        document.getElementById("form").reset();
+    };
 
-// const auth = getAuth(app);
-
-export default function Home() {
-    // const [caption, setCaption] = useState("");
-    // const [prompt, setPrompt] = useState("");
-    // const [date, setDate] = useState("");
-
-    // const onSubmit = evt => {
-    //     evt.preventDefault();
-    //     fetch('https://timecache-365700.wl.r.appspot.com/addEntry', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             "uid": auth.currentUser.uid,
-    //             "caption": caption,
-    //             "prompt": prompt,
-    //             "date": date
-    //         })
-    //     })
-    //     document.getElementById("form").reset();
-    // };
-
-    // let data = {
-    //     prompt: "prompt",
-    //     caption: "caption",
-    //     date: "date", 
-    //     imageURL: "https://images.fineartamerica.com/images-medium-large-5/race-point-light-sunset-square-bill-wakeley.jpg"
-    //   }
+    let data = {
+        prompt: "prompt",
+        caption: "caption",
+        date: "date", 
+        imageURL: "https://images.fineartamerica.com/images-medium-large-5/race-point-light-sunset-square-bill-wakeley.jpg"
+      }
 
     return (
         <div className="App">
-            {/* <Container>
-                <Form className="mb-5">
+            <Container>
+                <Form className="mb-5" onSubmit={onSubmit}>
                     <Form.Group controlId="formCaption">
                         <Form.Label>
                             Caption
                         </Form.Label>
-                        <Form.Control type="Caption" placeholder="Enter Caption Here"/>
+                        <Form.Control type="Caption" placeholder="Enter Caption Here" onChange={e => setCaption(e.target.value)}/>
                         <Form.Text>
-                            Write a short caption for your diary entry
+                            Write a short caption for your TimeCache entry
                         </Form.Text>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
                             Image Prompt
                         </Form.Label>
-                        <Form.Control type="Image Prompt" placeholder="Enter Image Prompt Here"/>
+                        <Form.Control type="Image Prompt" placeholder="Enter Image Prompt Here" onChange={e => setPrompt(e.target.value)}/>
                         <Form.Text>
-                            Write a detailed description to generator your image
+                            Write a detailed description to generate your image
                         </Form.Text>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
-                            Image Prompt
+                            TimeCache Entry
                         </Form.Label>
-                        <Form.Control type="Image Prompt" placeholder="Enter Image Prompt Here"/>
+                        <Form.Control type="Entry" placeholder="Enter Image Prompt Here" onChange={e => setEntry(e.target.value)}/>
                         <Form.Text>
-                            Write a detailed description to generator your image
+                            Write a your TimeCache entry
                         </Form.Text>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
                             Date
                         </Form.Label>
-                        <Form.Control type="Image Prompt" placeholder="Enter Image Prompt Here"/>
+                        <Form.Control type="Date" placeholder="Enter Image Prompt Here" onChange={e => setDate(e.target.value)}/>
                         <Form.Text>
                             Write a detailed description to generator your image
                         </Form.Text>
                     </Form.Group>
                     <Button variant="secondary" type='submit'>Save Entry</Button>
                 </Form>
-            </Container> */}
-            {/* <form onSubmit={onSubmit} controlId="formEntry">
-                <input 
-                    type="text" 
-                    id="caption" 
-                    placeholder="Caption"
-                    onChange={(e)=>setCaption(e.target.value)}></input> 
+            </Container>
 
-                <br></br>
-                <input 
-                    type="text" 
-                    id="prompt" 
-                    placeholder="Prompt"
-                    onChange={(e)=>setPrompt(e.target.value)}></input>
-                    
-                <br></br>
-                <input
-                    type="date" 
-                    id="date" 
-                    onChange={(e)=>setDate(e.target.value)}></input>
-                <br></br>
-                <button type="submit" id="submit">Submit</button>
-            </form> */}
             <Container>
                 <Form className="mb-5">
                     <Row>

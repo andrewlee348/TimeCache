@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from entry import getImage
 
 app = FastAPI(
-    title="Montage My Life"
+    title="TimeCache"
 )
 
 app.add_middleware(
@@ -29,10 +29,7 @@ class Entry(BaseModel):
 
 @app.post("/addEntry/")
 async def upload_entry(entry: Entry):
-    print(jsonable_encoder(entry))
     entry.image = await getImage(entry.prompt)
-    print(entry.image)
-
     db.collection(entry.uid).document(entry.date).set(jsonable_encoder(entry))
 
 @app.post("/deleteEntry/{uid}/{date}")
