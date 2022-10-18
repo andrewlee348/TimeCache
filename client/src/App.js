@@ -1,10 +1,12 @@
 import './App.css';
-import { useEffect } from 'react';
-import Home from './components/home';
+import { useState, useEffect } from 'react';
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { getAuth } from "firebase/auth";
+
 import {BrowserRouter, Routes, Route} from "react-router-dom"
+
+import Home from './components/home';
 import Login from "./components/login"
 
 const firebaseConfig = {
@@ -17,28 +19,28 @@ const firebaseConfig = {
     measurementId: "G-G64487P1Z6"
   };
 
-// Initialize Firebase
 var app = firebase.initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
-
 function App() {
+    const [currentUser, setCurrentUser] = useState({});
+
     useEffect(() => {
-        if (!auth.currentUser) {
-            console.log("Not signed in")
-        }
+        app.auth().onAuthStateChanged(user => {
+            if (user) {
+                setCurrentUser(user)
+            }
+            else {
+                console.log("Not signed in")
+            }
+          })
     }), []
 
     return (
         <BrowserRouter>
-        <Routes>
-                <Route path="/">
-                    <Home />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                </Routes>
+            <Routes>
+                <Route path="/" element={<Home currentUser={currentUser}/>} />
+                <Route path="/login" element={<Login />}/>
+            </Routes>
         </BrowserRouter>
     );
 }
