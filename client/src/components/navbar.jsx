@@ -6,8 +6,8 @@ export default function Nav_Bar() {
             <Container> 
                 <Navbar.Brand href="/">TimeCache</Navbar.Brand>
                 <NavDropdown title="Account" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#/login">Login</NavDropdown.Item>
-                    <NavDropdown.Item href="#/sign_up">Sign-Up</NavDropdown.Item>
+                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                    <NavDropdown.Item href="/sign_up">Sign-Up</NavDropdown.Item>
                 </NavDropdown>
             </Container>
         </Navbar>

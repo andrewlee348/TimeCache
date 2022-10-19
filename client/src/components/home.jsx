@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap'
-import Nav_Bar from './navbar';
+import { Link } from 'react-router-dom';
 
 export default function Home(props) {
     const [caption, setCaption] = useState("");
@@ -37,74 +37,37 @@ export default function Home(props) {
 
     return (
         <div className="App">
-            <Nav_Bar />
-            <Container>
+            <Container className="mt-3">
                 <Form className="mb-5" onSubmit={onSubmit}>
-                    <Form.Group controlId="formCaption">
+                    <Form.Group className="mb-3">
                         <Form.Label>
                             Caption
                         </Form.Label>
-                        <Form.Control type="Caption" placeholder="Enter Caption Here" onChange={e => setCaption(e.target.value)}/>
-                        <Form.Text>
-                            Write a short caption for your TimeCache entry
-                        </Form.Text>
+                        <Form.Control type="Caption" placeholder="Enter Caption" onChange={e => setCaption(e.target.value)}/>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className="mb-3">
                         <Form.Label>
                             Image Prompt
                         </Form.Label>
-                        <Form.Control type="Image Prompt" placeholder="Enter Image Prompt Here" onChange={e => setPrompt(e.target.value)}/>
-                        <Form.Text>
-                            Write a detailed description to generate your image
-                        </Form.Text>
+                        <Form.Control type="Image Prompt" placeholder="Write a Detailed Description to Generate your Image" onChange={e => setPrompt(e.target.value)}/>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className="mb-3">
                         <Form.Label>
                             TimeCache Entry
                         </Form.Label>
-                        <Form.Control type="Entry" placeholder="Enter Image Prompt Here" onChange={e => setEntry(e.target.value)}/>
-                        <Form.Text>
-                            Write a your TimeCache entry
-                        </Form.Text>
+                        <Form.Control type="Entry" placeholder="Enter Image Prompt" onChange={e => setEntry(e.target.value)}/>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className="mb-3">
                         <Form.Label>
                             Date
                         </Form.Label>
-                        <Form.Control type="Date" placeholder="Enter Image Prompt Here" onChange={e => setDate(e.target.value)}/>
-                        <Form.Text>
-                            Write a detailed description to generator your image
-                        </Form.Text>
+                        <Form.Control type="Date" placeholder="Enter Date" onChange={e => setDate(e.target.value)}/>
                     </Form.Group>
                     <Button variant="secondary" type='submit'>Save Entry</Button>
                 </Form>
             </Container>
 
             <Container>
-                {/* <Form className="mb-5">
-                    <Row>
-                        <Col md>
-                            <Form.Group controlId="formEmail">
-                                <Form.Label>
-                                    Email Address
-                                </Form.Label>
-                                <Form.Control type="email" placeholder="Example@email.com" />
-                                <Form.Text className="text-muted">
-                                    We'll never share your email address, trust us!
-                                </Form.Text>
-                            </Form.Group>
-                        </Col>
-                        <Col md>
-                            <Form.Group controlId="formPassword">
-                                <Form.Label>
-                                    Password
-                                </Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
-                            </Form.Group>
-                            <Button variant="secondary" type='submit'>Login</Button>
-                        </Col>
-                    </Row>
-                </Form> */}
                 <Card className="mb-5" style={{ color: "#000"}}>
                     <Card.Img src="https://images.fineartamerica.com/images-medium-large-5/race-point-light-sunset-square-bill-wakeley.jpg"/>
                     <Card.Body>

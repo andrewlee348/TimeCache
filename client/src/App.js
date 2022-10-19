@@ -6,8 +6,8 @@ import 'firebase/compat/auth';
 
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 
-import Home from './components/home';
-import Login from "./components/login"
+import Nav_Bar from './components/navbar';
+import Main from './components/main';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAqzPycylNq3jwBFJC6oFch0hACJhhxuyM",
@@ -36,12 +36,10 @@ function App() {
     }), []
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home currentUser={currentUser}/>} />
-                <Route path="/login" element={<Login />}/>
-            </Routes>
-        </BrowserRouter>
+        <div>
+            <Nav_Bar />
+            <Main />
+        </div>
     );
 }
 

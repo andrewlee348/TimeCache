@@ -21,7 +21,7 @@ var app = firebase.initializeApp(firebaseConfig);
 
 var ui = new firebaseui.auth.AuthUI(app.auth());
 
-function Login() {
+export default function Login() {
 
   useEffect(() => {
     ui.start('#auth-container', {
@@ -40,5 +40,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login
