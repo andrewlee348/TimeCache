@@ -10,10 +10,10 @@ export default function Home(props) {
     const [entry, setEntry] = useState("")
     const [entries, setEntries] = useState("")
 
-    useEffect(() => {
+    // useEffect(() => {
         // get entries from "getEntries" then set entries using "setEntries"
         // display each entry below
-    }), []
+    // }), []
 
     const onSubmit = evt => {
         evt.preventDefault();
@@ -91,3 +91,76 @@ export default function Home(props) {
         </div>
     )
 }
+
+
+
+// function Home() {
+
+//     const onSubmit = evt => {
+//         evt.preventDefault();
+//         fetch('https://timecache-365700.wl.r.appspot.com/addEntry', {
+//             method: 'POST',
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//                 "uid": auth.currentUser.uid,
+//                 "caption": caption,
+//                 "prompt": prompt,
+//                 "date": date
+//             })
+//         })
+//         document.getElementById("form").reset();
+
+
+//         // wait for database to update 
+        
+//         // get the newest data from the database 
+
+//         // parse the data into a new entry 
+        
+//         // post the new entry
+//     };
+
+//     let data = {
+//         prompt: "prompt",
+//         caption: "caption",
+//         date: "date", 
+//         imageURL: "https://images.fineartamerica.com/images-medium-large-5/race-point-light-sunset-square-bill-wakeley.jpg"
+//       }
+
+//     return (
+//         <div>
+//             <Nav_Bar />
+//             {/* <Button>Test Button</Button> */}
+//             <form onSubmit={onSubmit} id="form">
+//                 <input 
+//                     type="text" 
+//                     id="caption" 
+//                     placeholder="Caption"
+//                     onChange={(e)=>setCaption(e.target.value)}></input> 
+
+//                 <br></br>
+//                 <input 
+//                     type="text" 
+//                     id="prompt" 
+//                     placeholder="Prompt"
+//                     onChange={(e)=>setPrompt(e.target.value)}></input>
+                    
+//                 <br></br>
+//                 <input
+//                     type="date" 
+//                     id="date" 
+//                     onChange={(e)=>setDate(e.target.value)}></input>
+//                 <br></br>
+//                 <button type="submit" id="submit">Submit</button>
+//             </form>
+//             <div>
+//             <Entry prompt={data.prompt} caption={data.caption} log={data.date} imageURL={data.imageURL}></Entry>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Home;
